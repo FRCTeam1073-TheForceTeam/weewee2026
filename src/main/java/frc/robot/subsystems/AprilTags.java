@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // UDP Networking
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -68,6 +69,31 @@ public class AprilTags  extends SubsystemBase  {
         packet_buffer = ByteBuffer.allocate(1024);
     }
 
+    //Parses the buffer from vision server into April Tags
+    private Tag[] unpackData(ByteBuffer data)
+    {
+        //Corrects ordering of buffer
+        data.order(ByteOrder.LITTLE_ENDIAN);
+        //Gets how many tags are in the buffer and accounts for byte padding
+        byte count = data.get();
+        data.get(new byte[3]);
+        Tag[] tags = new Tag[count];
+        //Parses the data into a Tag object for each April Tag received
+        for(int i = 0; i<count; i++)
+        {
+            Tag t = new Tag();
+            t.id = (byte) data.getInt();
+            t.timestamp = data.getFloat();
+            t.x = data.getFloat();
+            t.y = data.getFloat();
+            t.z = data.getFloat();
+            t.theta = data.getFloat();
+            t.confidence = data.getFloat();
+            tags[i] = t;
+        }
+        return tags;
+    }
+
     @Override
     public void periodic() {
           
@@ -86,10 +112,8 @@ public class AprilTags  extends SubsystemBase  {
                     readableChannel.receive(packet_buffer);
                     packet_buffer.flip();
                     
-                    // TODO: Parse the buffer into April Tag information:
-
-                    String receivedData = new String(packet_buffer.array(), 0, packet_buffer.limit());
                     System.out.println("Received (NIO): " + receivedData);
+                    System.out.println("Received (NIO): " + aprilTags.length);
                 }
                 keyIterator.remove();
             }
