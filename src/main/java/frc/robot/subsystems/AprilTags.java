@@ -112,7 +112,7 @@ public class AprilTags  extends SubsystemBase  {
                     readableChannel.receive(packet_buffer);
                     packet_buffer.flip();
                     
-                    System.out.println("Received (NIO): " + receivedData);
+                    Tag[] aprilTags = unpackData(packet_buffer);
                     System.out.println("Received (NIO): " + aprilTags.length);
                 }
                 keyIterator.remove();
