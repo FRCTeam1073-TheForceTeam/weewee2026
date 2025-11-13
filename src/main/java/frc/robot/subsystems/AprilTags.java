@@ -52,7 +52,7 @@ public class AprilTags  extends SubsystemBase  {
 
 
     // Constructor:
-    AprilTags() {
+    public AprilTags() {
         try {
            channel = DatagramChannel.open();
            channel.bind(new InetSocketAddress(port)); // Listen on port 12346
@@ -96,7 +96,7 @@ public class AprilTags  extends SubsystemBase  {
 
     @Override
     public void periodic() {
-          
+        System.out.println("April Tag Periodic Running");  
         try {
             int readyChannels = selector.select(); // Blocks until at least one channel is ready
             if (readyChannels == 0) return;
