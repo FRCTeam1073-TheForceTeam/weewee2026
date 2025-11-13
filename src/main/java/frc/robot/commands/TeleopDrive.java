@@ -33,9 +33,6 @@ public class TeleopDrive extends Command
   boolean lastParkingBreakButton = false;
   boolean lastFieldCentricButton = true;
   boolean pointAtTarget;
-  AprilTagFinder aprilTagFinder;
-  Localizer localizer;
-  Lidar lidar;
 
   PIDController snapPidProfile;
 
@@ -61,10 +58,8 @@ public class TeleopDrive extends Command
   double torqueGate = 65; 
 
   /** Creates a new Teleop. */
-  public TeleopDrive(Drivetrain drivetrain, OI oi, AprilTagFinder finder, Localizer localizer, Lidar lidar){
-    this.lidar = lidar;
+  public TeleopDrive(Drivetrain drivetrain, OI oi){
     this.drivetrain = drivetrain;
-    this.localizer = localizer;
     m_OI = oi;
     fieldCentric = true;
     pointAtTarget = false;
@@ -72,7 +67,6 @@ public class TeleopDrive extends Command
       0.05, 
       0.0, 
       0.0);
-    aprilTagFinder = finder;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
 
@@ -146,23 +140,8 @@ public class TeleopDrive extends Command
         vy = MathUtil.clamp((allianceSign * leftX * maximumLinearVelocity / 25 ) * mult1 * mult2, -maximumLinearVelocity, maximumLinearVelocity);
         w = MathUtil.clamp((rightX * maximumRotationVelocity / 25) * mult1 * mult2, -maximumRotationVelocity, maximumRotationVelocity);
 
-        SmartDashboard.putNumber("TeleopDrive/vx", vx);
-        if(fieldCentric)
-        {
-          drivetrain.setTargetChassisSpeeds(
-            ChassisSpeeds.fromFieldRelativeSpeeds(
-                vx, 
-                vy,
-                w,  
-                Rotation2d.fromDegrees(localizer.getPose().getRotation().getDegrees()) // gets fused heading
-                // Rotation2d.fromDegrees(drivetrain.getOdometryThetaRadians())
-            )
-          );
-        }
-        else 
-        {
+        SmartDashboard.putNumber("TeleopDrive/vx", vx); 
           drivetrain.setTargetChassisSpeeds(new ChassisSpeeds(vx, vy, w));
-        }
       }
       else {
         //robot centric creep

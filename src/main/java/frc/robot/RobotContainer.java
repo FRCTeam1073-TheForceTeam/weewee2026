@@ -7,10 +7,12 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.TeleopDrive;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.OI;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -26,12 +28,16 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final OI m_OI = new OI();
   private final Drivetrain m_Drivetrain = new Drivetrain();
+  private final TeleopDrive cmd_TeleopDrive = new TeleopDrive(m_Drivetrain, m_OI);
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
+  public RobotContainer() 
+  {
+    CommandScheduler.getInstance().setDefaultCommand(m_Drivetrain, cmd_TeleopDrive);
     // Configure the trigger bindings
     configureBindings();
   }
@@ -65,3 +71,6 @@ public class RobotContainer {
     return Autos.exampleAuto(m_exampleSubsystem);
   }
 }
+
+//if a coconut broke everything blame allen.
+//import file.e.coconut.exe.png.jpg.java.mp4.mp5.mp-1.hi.die.gif.coconut.webp.txt.py.java#2;
