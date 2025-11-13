@@ -141,8 +141,8 @@ public class Drivetrain extends SubsystemBase
     return targetChassisSpeeds.omegaRadiansPerSecond;
   }
 
-  @Override
-  public void initSendable(SendableBuilder builder){
+  /*@Override
+    public void initSendable(SendableBuilder builder){
     super.initSendable(builder);
     //TODO: take out sendable stuff from the code
     // builder.setSmartDashboardType("Drivetrain");
@@ -157,7 +157,7 @@ public class Drivetrain extends SubsystemBase
     builder.addDoubleProperty("Target Omega", this::getTargetOmega, null);
     builder.addDoubleProperty("Pitch", this::getPitch, null);
     builder.addDoubleProperty("Roll", this::getRoll, null);
-  }
+  }*/
 
   // @Override
   // public boolean updateDiagnostics() {
