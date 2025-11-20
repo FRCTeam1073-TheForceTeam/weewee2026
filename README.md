@@ -1,18 +1,19 @@
 # weewee2026
 Test robot code platform fro 2025/2026 season.
 
-Front is where LIDAR is
-Talon FX ID 5: Front left STEER
-Talon FX ID 6: Front right STEER
-Talon FX ID 7: Back left STEER
-Talon FX ID 8: Back right STEER
-
-Talon FX ID 9: Front left drive
-Talon FX ID 10: Front right drive
-Talon FX ID 11: Back left drive
-Talon FX ID 12: Back right drive
-
-CANcoder ID 1: Front left
-CANcoder ID 2: Front right
-CANcoder ID 3: Back left
-CANcoder ID 4: Back right
+## Module CAN IDs
+| Device                | CAN ID |      BUS      |    Location    |
+| --------------------- | ------ | ------------- | -------------- |
+| Swerve #0 Encoder     |   1    |   CANivore    |   Front Left   |
+| Swerve #1 Encoder     |   2    |   CANivore    |   Front Right  |
+| Swerve #2 Encoder     |   3    |   CANivore    |   Back Left    |
+| Swerve #3 Encoder     |   4    |   CANivore    |   Back Right   | 
+| Swerve #0 Drive Motor |   9    |   CANivore    |   Front Left   |
+| Swerve #0 Steer Motor |   5    |   CANivore    |   Front Left   |
+| Swerve #1 Drive Motor |  10    |   CANivore    |   Front Right  |
+| Swerve #1 Steer Motor |   6    |   CANivore    |   Front Right  |
+| Swerve #2 Drive Motor |  11    |   CANivore    |   Back Left    |
+| Swerve #2 Steer Motor |   7    |   CANivore    |   Back Left    |
+| Swerve #3 Drive Motor |  12    |   CANivore    |   Back Right   |
+| Swerve #3 Steer Motor |   8    |   CANivore    |   Back Right   |
+| Pigeon 2              |  13    |   CANivore    |   Robot Center |
