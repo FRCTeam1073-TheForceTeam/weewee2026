@@ -51,7 +51,7 @@ public class SwerveModule extends SubsystemBase implements Sendable
     private double targetDriveVelocity = 0.0;
     private double targetDriveVelocityRotations = 0.0;
     private double steerVelocity;
-    private final String kCANbus = "CANivore";
+    private final String kCANbus = "rio";
 
 
     /** Constructs a swerve module class. Initializes drive and steer motors
