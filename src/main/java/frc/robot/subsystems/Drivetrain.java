@@ -31,7 +31,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase
 {
-  private final String kCANbus = "CANivore";
   private SwerveDriveKinematics kinematics;
   private SwerveDriveOdometry odometry;
   private SwerveModule[] modules;
@@ -48,7 +47,7 @@ public class Drivetrain extends SubsystemBase
   {
     super.setSubsystem("Drivetrain");
 
-    pigeon2 = new Pigeon2(13, kCANbus);
+    pigeon2 = new Pigeon2(13, "rio");
     var error = pigeon2.getConfigurator().apply(new Pigeon2Configuration());
     if (!error.isOK()) 
     {
